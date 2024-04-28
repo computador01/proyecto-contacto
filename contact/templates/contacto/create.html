@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} Registrar contacto {% endblock title %}
+
+{% block content %}
+
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h4 class="cell">
+            <b>Registrar contacto</b>
+        </h4>
+    </div>   
+    
+    <div class="cell">
+    <form class="grid-x grid-margin-x" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        
+        <div class="cell large-6">
+            <label>Nombre:
+                {{ form.nombre }}
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label>Apellidos:
+                {{ form.apellidos }}
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label>Profesión:
+                {{ form.profesion }}
+            </label>
+        </div>
+
+        
+
+        <div class="cell large-6">
+            <label>Teléfono:
+                {{ form.telefono }}
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label>Dirección:
+                {{ form.direccion }}
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label>Ciudad:
+                {{ form.ciudad }}
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label>Foto:
+                {{form.foto}}
+            </label>
+        </div>
+
+        <div class="cell">
+            <button class="submit success button">Guardar</button>  
+        </div>
+
+    </form>
+   </div>
+   </div>
+</div>
+
+{% endblock content %} 

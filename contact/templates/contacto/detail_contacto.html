@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}
+{{ object.nombre}}
+{% endblock title%}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-x align-center">
+    <h4 class="cell large-8" style="font-size: 25px; text-align: center;"><b>Detalle de contacto</b></h4>
+    <div class="cell large-7">
+        <div class="callout success">
+            <h5 style="text-align:center;">Id: {{ object.id}}</h5>
+            <h5 style="text-align:center;">Foto:</h5>
+            <h5 style="text-align:center;"><img src="{{ object.foto.url }}"></h5>
+            <h5 style="text-align:center;">Nombre: {{ object.nombre}}</h5>
+            <h5 style="text-align:center;">Apellidos: {{ object.apellidos}}</h5>
+            <h5 style="text-align:center;">Profesión: {{ object.profesion}}</h5>
+            <h5 style="text-align:center;">Teléfono: {{ object.telefono}}</h5>
+            <h5 style="text-align:center;">Dirección: {{ object.direccion}}</h5>
+            <h5 style="text-align:center;">Ciudad: {{ object.ciudad}}</h5>
+            
+          </div>
+          </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+
+
+    
+
+
+

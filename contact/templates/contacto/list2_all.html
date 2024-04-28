@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %} Administrar contactos {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+
+   <div class="grid-x">
+     <h4 class="cell"><b>Administrar contactos</b></h4>
+     
+     <div class="cell">
+      
+      <table>
+        <thead>
+          <tr>
+            <th width="150">Código</th>
+            <th width="150">Foto</th>
+            <th width="170">Nombre</th>
+            <th width="220">Apellidos</th>
+            <th width="170">Profesión</th>
+            <th width="180">Teléfono</th>
+            <th width="200">Dirección</th>
+            <th width="110">Ciudad</th>
+            <th width="100">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+           {% for a in object_list %} 
+          <tr>
+            <td>{{ a.id }}</td>
+            <td><img src="{{ a.foto.url }}"></td>
+            <td>{{ a.nombre }}</td>
+            <td>{{ a.apellidos }}</td>
+            <td>{{ a.profesion }}</td>
+            <td>{{ a.telefono }}</td>
+            <td>{{ a.direccion }}</td>
+            <td>{{ a.ciudad }}</td>
+            <td><a class=" success button" href="{% url 'contactos_app:update' a.id %}">Modificar</a></td>
+            <td><a class="alert button" href="{% url 'contactos_app:delete' a.id %}">Eliminar</a></td>
+
+          </tr>
+          {% endfor %}
+  
+        </tbody>
+      </table>
+     </div>
+
+     <!--------Inicio de pagination---------->
+     <div class="cell">
+      
+      {% if is_paginated %}
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+            
+            {% if page_obj.has_previous %}
+            <li class="pagination-previous">
+                <a href="?page={{page_obj.previous_page_number}}">Atrás</a>
+            </li> 
+            {% endif %}
+
+            {% for pagina in paginator.page_range  %}
+
+            {% if pagina ==  page_obj.number %}
+            <li class="current"><span class="show-for-sr">You're on page</span>{{ pagina }}</li>
+            {% else %}
+            <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
+            {% endif %}
+            {% endfor %}
+              
+            
+            {% if page_obj.has_next %}
+            <li class="pagination-next">
+                <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+            </li> 
+            {% endif %}
+        </ul>
+      </nav>
+     </div>
+      {% endif %}
+  
+     <!--------Fin de pagination---------->
+
+   </div>
+
+  </div>
+  
+</div>
+
+{% endblock content %} 

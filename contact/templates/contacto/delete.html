@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Eliminar contacto {% endblock title %}
+
+{% block content %}
+
+
+{% include 'includes/header.html' %}
+
+<form class="grid-x align-center" method="POST"> {% csrf_token %}
+    <h1 class="cell large-8" style="font-size: 25px; text-align: center;">Eliminar contacto: <b>{{ object.nombre }} {{ object.apellidos }}</b></h1>
+    <div class="cell large-7">
+        <div class="callout success">
+            <h5 style="text-align:center;">¿Estás seguro de que deseas eliminar este contacto?</h5>
+            <p style="text-align:center"><button class="submit alert button">Confirmar</button>   
+</form>
+   </div>
+
+  </div>
+
+</div>
+
+{% endblock content %} 

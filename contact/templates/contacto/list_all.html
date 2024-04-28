@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de contactos {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+
+   <div class="grid-x">
+     <h4 class="cell"><b >Lista de contactos</b></h4>
+     <form class="cell grid-x grid-margin-x" method="GET"> {% csrf_token %}
+          <div class="cell large-4">
+            <!-- aqui va caja de texto -->
+              <input type="text" id="kword" name="kword" placeholder="buscar contacto...">
+              
+          </div class="cell large-2">
+          <div >
+            <button class="submit success button">Buscar</button>
+            <a href="{% url 'contactos_app:listarpdf' %}" class="submit primary button" target="_blank">Imprimir</a>
+          </div>
+          
+        </form>
+    
+      <table>
+        
+        <thead>
+          <tr>
+            <th width="150">Código</th>
+            <th width="150">Foto</th>
+            <th width="170">Nombre</th>
+            <th width="220">Apellidos</th>
+            <th width="170">Profesión</th>
+            <th width="180">Teléfono</th>
+            <th width="200">Dirección</th>
+            <th width="110">Ciudad</th>
+            <th width="170">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+           {% for a in object_list %} 
+          <tr>
+            <td>{{ a.id }}</td>
+            <td><img src="{{ a.foto.url }}"></td>
+            <td>{{ a.nombre }}</td>
+            <td>{{ a.apellidos }}</td>
+            <td>{{ a.profesion }}</td>
+            <td>{{ a.telefono }}</td>
+            <td>{{ a.direccion }}</td>
+            <td>{{ a.ciudad }}</td>
+            <td><a class="button warning" href="{% url 'contactos_app:contactos_detail' a.id %}">Ver</a></td>
+
+          </tr>
+          {% endfor %}
+  
+        </tbody>
+      </table>
+     </div>
+
+     <!--------Inicio de pagination---------->
+     <div class="cell">
+      
+      {% if is_paginated %}
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+            
+            {% if page_obj.has_previous %}
+            <li class="pagination-previous">
+                <a href="?page={{page_obj.previous_page_number}}">Atrás</a>
+            </li> 
+            {% endif %}
+
+            {% for pagina in paginator.page_range  %}
+
+            {% if pagina ==  page_obj.number %}
+            <li class="current"><span class="show-for-sr">You're on page</span>{{ pagina }}</li>
+            {% else %}
+            <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
+            {% endif %}
+            {% endfor %}
+              
+            
+            {% if page_obj.has_next %}
+            <li class="pagination-next">
+                <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+            </li> 
+            {% endif %}
+        </ul>
+      </nav>
+     </div>
+      {% endif %}
+  
+     <!--------Fin de pagination---------->
+
+   </div>
+
+  </div>
+  
+</div>
+
+{% endblock content %} 
